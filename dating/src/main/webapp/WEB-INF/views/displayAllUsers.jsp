@@ -24,59 +24,53 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body><br>
+		<jsp:include page="header.jsp"/>
+		<hr/>
 		<div class="container">
 			<p class="bg-primary text-danger text-center"><h1>All Users of Dating Application</h1><br>
 		</div>
 		<div class="container-fluid">
-		 <div class="row-fluid">
-		  <div class="span12">
-		    <fieldset>
-				<table class="table table-hover table-striped-rows table-bordered table-condensed">
-				    <tr class="text-danger">
-				        <th>User ID</th>
-				        <th>First Name</th>
-				        <th>Last Name</th>
-				        <th>Date of Birth</th>
-				        <th>Gender</th>
-				        <th>Address</th>
-				        <th>Delete | Update</th>
-				    </tr>
-		           	<c:forEach var="user" items="${userList}">
-			            <tr>
-			                <td>
-			                    <c:out value="${user.userId}" /> 
-			                </td>
-			                <td>
-			                    <c:out value="${user.firstName}" /> 
-			                </td>
-			                <td>
-			                    <c:out value="${user.lastName}" />
-			                </td>
-			                <td>
-			                    <c:out value="${user.dateOfBirth}" /> 
-			                </td>
-			                <td>
-			                    <c:out value="${user.gender}" /> 
-			                </td>
-			                <td>
-			                    <c:out value="${user.address}" />
-			                </td>
-			                <td>
-			                    <!-- <a href="addComments">Post Comment</a> -->
-
-			                    <a href="deleteUser/${user.userId}" style='text-decoration: none;'>Delete</a> | <a href="editUser/${user.userId}" style='text-decoration: none;'>Edit</a>
-			                    
-				  				<%-- <button class="btn btn-info" onclick="location.href='addComments/id=${listValue.postId}'">Post Comment</button> --%>
-
-			                    <%-- <a href="addComments?id=${listValue.postId}"><img src="<c:url value="/resources/comment.jpg" />" alt="Post Comment"/></a> --%>
-			                </td>
-			            </tr>
-		           	</c:forEach>
-		        </table>
-		    </fieldset>
-	   </div>
-	  </div>
-	 </div>  
+		 	<div class="row-fluid">
+		  		<div class="span12">
+		    		<fieldset>
+						<table class="table table-hover table-striped-rows table-bordered table-condensed">
+						    <tr class="text-danger">
+						        <th>User ID</th>
+						        <th>First Name</th>
+						        <th>Last Name</th>
+						        <th>Date of Birth</th>
+						        <th>Gender</th>
+						        <th>Address</th>
+						    </tr>
+				           	<c:forEach var="user" items="${userList}">
+					            <tr>
+					                <td>
+					                    <c:out value="${user.userId}" /> 
+					                </td>
+					                <td>
+					                    <c:out value="${user.firstName}" /> 
+					                </td>
+					                <td>
+					                    <c:out value="${user.lastName}" />
+					                </td>
+					                <td>
+					                    <c:out value="${user.dateOfBirth}" /> 
+					                </td>
+					                <td>
+					                    <c:out value="${user.gender}" /> 
+					                </td>
+					                <td>
+					                    <c:out value="${user.address}" />
+					                </td>
+					            </tr>
+				           	</c:forEach>
+				        </table>
+				    </fieldset>
+	   			</div>
+	  		</div>
+	 	</div>
+		<hr/>
+		<jsp:include page="footer.jsp"/>
 	</body>
 </html>

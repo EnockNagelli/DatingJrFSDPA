@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	</head>
 	<body><br>
+		<jsp:include page="header.jsp"/>
+		<hr/>
 		<div class="container">
 			<div style="height: 100px;">
 				<div class="bg-danger h-50 d-inline-block text-white text-center form-rounded" style="width: 1120px;"><h2>Dating Application : Profile Information</h2></div>
@@ -72,6 +74,8 @@
 				<div class="bg-primary h-50 text-white text-center form-rounded">@ Copy right : www.iiht.com</div>
 		  	</div>
 		</div>
+		<hr/>
+		<jsp:include page="footer.jsp"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>

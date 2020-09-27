@@ -13,7 +13,9 @@
             }
         </style>
     </head>
-    <body>
+    <body><br>
+		<jsp:include page="header.jsp"/>
+		<hr/>
         <div class="container">
             <h2 align="center" class="text-primary">Dating Application - User Login</h2>
             <hr />
@@ -33,5 +35,7 @@
                  </div>
             </form:form>
         </div>
+        <hr/>
+		<jsp:include page="footer.jsp"/>
     </body>
 </html>
