@@ -1,10 +1,12 @@
 package com.iiht.dating.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +30,6 @@ import com.iiht.dating.model.UserExceptionResponse;
 import com.iiht.dating.service.UserService;
 
 @Controller
-//@RequestMapping(value = "/user")
 public class UserController {
 
 	@Autowired
@@ -56,14 +59,13 @@ public class UserController {
 	}	
 	//----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-	public String saveUserInfo(HttpServletRequest request) {
+	public String saveUserInfo(HttpServletRequest request) throws Exception {
 
 		System.out.println("Inside Save User Information....");
 		
-		//Long userId = Long.parseLong(request.getParameter("userId"));
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		LocalDate dateOfBirth = LocalDate.parse(request.getParameter("dateOfBirth"));
+		Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
 		String gender = request.getParameter("gender");
 		String address = request.getParameter("address");
 		String loginName = request.getParameter("loginName");
@@ -71,7 +73,6 @@ public class UserController {
 
 		User user = new User();
 
-		//user.setUserId(userId);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setDateOfBirth(dateOfBirth);
@@ -79,19 +80,6 @@ public class UserController {
 		user.setAddress(address);
 		user.setLoginName(loginName);
 		user.setPassword(password);
-
-		/*
-		 * System.out.println("Company Details : ");
-		 * System.out.println("----------------------------------");
-		 * System.out.println("1. Company Code : " + companyDetails.getCompanyCode());
-		 * System.out.println("2. Registered Stock Exchange : " + companyDetails.getStockExchange()); 
-		 * System.out.println("3. Company Name : " + companyDetails.getCompanyName()); 
-		 * System.out.println("4. Company CEO : " + companyDetails.getCompanyCEO()); 
-		 * System.out.println("5. Company Turnover : " + companyDetails.getTurnover());
-		 * System.out.println("6. Board Of Directors : " + companyDetails.getBoardOfDirectors());
-		 * System.out.println("7. Company Profile : " + companyDetails.getCompanyProfile());
-		 * System.out.println("----------------------------------");
-		 */
 		 
 		userService.saveUser(user);
 
@@ -115,11 +103,111 @@ public class UserController {
 	}
 
 	//----------------------------------------------------------------------------------------------------------------	
-	@RequestMapping("/listAllUsers")
-	public ModelAndView findAllUsers(){
-		return new ModelAndView();
-	}
+	@RequestMapping(value = "/listAllUsers", method = RequestMethod.GET)
+	public ModelAndView findAllUsers() {
+		
+		ModelAndView md = null;
+		try {
+			List<User> userList = userService.getAllUsers();
 
+			if (!CollectionUtils.isEmpty(userList)) {
+				md = new ModelAndView("displayAllUsers", "userList", userList);
+			} else {
+				md = new ModelAndView("home");
+				throw new RuntimeException("No Records Found");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return md;		
+	}
+	//----------------------------------------------------------------------------------------------------------------	
+	@RequestMapping(value = "/deleteUser/{userId}", method = RequestMethod.GET)
+	public ModelAndView deleteUser(@PathVariable(name = "userId") Long userId) {
+		
+		Boolean value = userService.deleteUser(userId);
+		
+		if(value == true)
+		{
+			List<User> userList = userService.getAllUsers();
+			return new ModelAndView("displayAllUsers", "userList", userList );
+		}
+		else
+			return new ModelAndView("home");
+	}	
+	//----------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/editUser/{userId}", method = RequestMethod.GET)
+	public ModelAndView showEditUserPage(HttpServletRequest request, @PathVariable(name = "userId") Long userId) {
+		
+		User user = userService.getUserById(userId);
+		
+	    HttpSession editUserSession = request.getSession();
+	    editUserSession.setAttribute("loginName", user.getLoginName());
+	    editUserSession.setAttribute("password", user.getPassword());
+			    
+		/*
+		 * System.out.println("User Id : "+userId);
+		 * System.out.println("First Name : "+user.getFirstName());
+		 * System.out.println("Lasst Name : "+user.getLastName());
+		 * System.out.println("Date Of Birth : "+user.getDateOfBirth());
+		 * System.out.println("User Gender : "+user.getGender());
+		 * System.out.println("Address : "+user.getAddress());
+		 * System.out.println("Login Name : "+user.getLoginName());
+		 * System.out.println("Password : "+user.getPassword());
+		 */
+		
+	    return new ModelAndView("editUser", "userData", user);
+	}
+	//----------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value = "/saveEditUser/{userId}")
+	public ModelAndView updateUserInfo(HttpServletRequest request, @PathVariable(name="userId") Long userId) {
+
+		System.out.println("Inside Saving Edited User Information....");
+		
+	    HttpSession editUserSession = request.getSession();
+
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		Date dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth"));
+		String gender = request.getParameter("gender");
+		String address = request.getParameter("address");
+		String loginName = (String) editUserSession.getAttribute("loginName");
+		String password = (String) editUserSession.getAttribute("password");
+
+		/*
+		 * System.out.println("\n"); System.out.println("After Editing");
+		 * System.out.println("------------------------------------------------------");
+		 * System.out.println("User Id : "+userId);
+		 * System.out.println("First Name : "+firstName);
+		 * System.out.println("Lasst Name : "+lastName);
+		 * System.out.println("Date Of Birth : "+dateOfBirth);
+		 * System.out.println("User Gender : "+gender);
+		 * System.out.println("Address : "+address);
+		 * System.out.println("Login Name : "+loginName);
+		 * System.out.println("Password : "+password); System.out.println("\n");
+		 */
+
+	    User user = new User();
+	    
+		user.setUserId(userId);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setDateOfBirth(dateOfBirth);
+		user.setGender(gender);
+		user.setAddress(address);
+		user.setLoginName(loginName);
+		user.setPassword(password);
+		 
+		Boolean updated = userService.updateUser(user);
+
+		if(updated == true)
+		{
+			List<User> userList = userService.getAllUsers();
+			return new ModelAndView("displayAllUsers", "userList", userList);
+		}
+		else
+			return new ModelAndView("editUser");
+	}
 	
 	//----------------------------------------------------------------------------------------------------------------
 	// 			1. Exception Handling

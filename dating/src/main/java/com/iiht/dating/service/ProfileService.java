@@ -1,11 +1,11 @@
-package com.iiht.dating.dao;
+package com.iiht.dating.service;
 
 import java.util.List;
 
 import com.iiht.dating.model.Profile;
 
-public interface ProfileDao {
-
+public interface ProfileService {
+	
 	public Boolean saveProfile(Profile profile);
 	public Boolean deleteProfile(Long userId);
 	public Boolean updateProfile(Profile profile);

@@ -4,35 +4,26 @@ import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
 @Table(name="Profile")
 public class Profile {
 
 	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "userId")
 	private Long userId;
 
 	@NotNull
-	@Column(name = "image", unique=true)
-	private Blob image;
+	@Column(name = "profileImage", unique=true)
+	@Lob
+	private Blob profileImage;
 
 	@NotNull
-	@Size(min=3, max=50)
 	@Column(name = "contactNo")
 	private Long contactNo;
 	
@@ -63,16 +54,15 @@ public class Profile {
 
 	public Profile() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Profile(Long userId, @NotNull Blob image, @NotNull @Size(min = 3, max = 50) Long contactNo,
+	public Profile(Long userId, @NotNull Blob profileImage, @NotNull @Size(min = 3, max = 50) Long contactNo,
 			@NotNull @Size(min = 1, max = 255) String email, @NotNull @Size(min = 1, max = 255) String qualification,
 			@NotNull @Size(min = 1, max = 255) String hobbies, @NotNull @Size(min = 1, max = 255) String foodHabits,
 			@NotNull @Size(min = 1, max = 255) String aboutMe) {
 		super();
 		this.userId = userId;
-		this.image = image;
+		this.profileImage = profileImage;
 		this.contactNo = contactNo;
 		this.email = email;
 		this.qualification = qualification;
@@ -88,11 +78,11 @@ public class Profile {
 		this.userId = userId;
 	}
 
-	public Blob getImage() {
-		return image;
+	public Blob getProfileImage() {
+		return profileImage;
 	}
-	public void setImage(Blob image) {
-		this.image = image;
+	public void setProfileImage(Blob profileImage) {
+		this.profileImage = profileImage;
 	}
 
 	public Long getContactNo() {

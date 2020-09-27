@@ -1,17 +1,17 @@
 package com.iiht.dating.model;
 
-public class UserExceptionResponse {
-	
+public class DatingExceptionResponse {
+
 	private String message;
 	private long timeStamp;
 	private int status;
 	
-	public UserExceptionResponse() {
+	public DatingExceptionResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserExceptionResponse(String message, long timeStamp, int status) {
+	public DatingExceptionResponse(String message, long timeStamp, int status) {
 		super();
 		this.message = message;
 		this.timeStamp = timeStamp;

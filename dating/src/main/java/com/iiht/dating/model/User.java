@@ -1,7 +1,7 @@
 package com.iiht.dating.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,13 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 @Entity
 @Table(name="User")
 public class User implements Serializable {
@@ -29,7 +22,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 8744222782294589450L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "userId")
 	private Long userId;
 
@@ -45,7 +38,7 @@ public class User implements Serializable {
 
 	@NotNull
 	@Column(name = "dateOfBirth")
-	private LocalDate dateOfBirth;
+	private Date dateOfBirth;
 
 	@NotNull
 	@Size(min=4, max=6)
@@ -77,11 +70,10 @@ public class User implements Serializable {
 
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}	
 	
 	public User(Long userId, @NotNull @Size(min = 3, max = 50) String firstName,
-			@NotNull @Size(min = 3, max = 50) String lastName, @NotNull LocalDate dateOfBirth,
+			@NotNull @Size(min = 3, max = 50) String lastName, @NotNull Date dateOfBirth,
 			@NotNull @Size(min = 4, max = 6) String gender, @NotNull @Size(min = 1, max = 255) String address,
 			@NotNull @Size(min = 1, max = 100) String loginName,
 			@NotNull @Size(min = 6, max = 10, message = "required") String password) {
@@ -117,10 +109,10 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

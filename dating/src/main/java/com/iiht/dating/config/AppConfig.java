@@ -75,7 +75,9 @@ public class AppConfig
 		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-		
+        //properties.put("hibernate.connection.SetBigStringTryClob", env.getRequiredProperty("hibernate.connection.SetBigStringTryClob"));
+        //properties.put("hibernate.jdbc.batch_size", env.getRequiredProperty("hibernate.jdbc.batch_size"));
+
         return properties;
 	}
 }

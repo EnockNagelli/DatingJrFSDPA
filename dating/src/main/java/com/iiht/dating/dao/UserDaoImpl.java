@@ -18,22 +18,45 @@ public class UserDaoImpl implements UserDao {
 	private SessionFactory sessionFactory;
 	
 	//-----------------------------------------------------------------------------------------------------------
-	public boolean saveUser(User user) {
+	public Boolean saveUser(User user) {
 		sessionFactory.getCurrentSession().save(user);
-		return true;
+		return Boolean.TRUE;
 	};
 	//-----------------------------------------------------------------------------------------------------------
-	public boolean deleteUser(Long userId) {
-		return true;
+	public Boolean deleteUser(Long userId) {
+		//String deleteQuery = "DELETE FROM USER us WHERE us.userId="+userId;
+		User user = sessionFactory.getCurrentSession().load(User.class, userId);
+		sessionFactory.getCurrentSession().delete(user);
+		return Boolean.TRUE;
 	};
 	//-----------------------------------------------------------------------------------------------------------
-	public void updateUser(Long userId) {
+	public Boolean updateUser(User user) {
 		
+		String updateHql = "UPDATE User us SET "
+				+ "us.firstName='"+user.getFirstName()+"', "
+				+ "us.lastName='"+user.getLastName()+"', "
+				+ "us.dateOfBirth='"+user.getDateOfBirth()+"', "
+				+ "us.gender='"+user.getGender()+"', "
+				+ "us.address='"+user.getAddress()+"', "
+				+ "us.loginName='"+user.getLoginName()+"', "
+				+ "us.password='"+user.getPassword()+"' "
+				+ "WHERE us.userId="+user.getUserId();
+		
+		int a = sessionFactory.getCurrentSession().createQuery(updateHql).executeUpdate();
+		if(a != 0 | a != -1)
+			return Boolean.TRUE;
+		else
+			return Boolean.FALSE;
+	};
+	//-----------------------------------------------------------------------------------------------------------
+	public User getUserById(Long userId) {
+		String hql = "SELECT us FROM User us where us.userId="+userId;
+		return (User) sessionFactory.getCurrentSession().createQuery(hql).uniqueResult();		
 	};
 	//-----------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
-	public List<User> showAllUser() {
-		String hql = "FROM User";		  		
+	public List<User> getAllUsers() {
+		String hql = "FROM User";
 		return (List<User>) sessionFactory.getCurrentSession().createQuery(hql).list();		
 	};
 	//-----------------------------------------------------------------------------------------------------------

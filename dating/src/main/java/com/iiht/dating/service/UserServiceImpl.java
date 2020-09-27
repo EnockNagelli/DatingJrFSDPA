@@ -25,13 +25,17 @@ public class UserServiceImpl implements UserService {
 		return userDao.deleteUser(userId);
 	};
 	//------------------------------------------------------------------------------
-	public void updateUser(Long userId) {
-		userDao.updateUser(userId);
+	public Boolean updateUser(User user) {
+		return userDao.updateUser(user);
 	};
 	//------------------------------------------------------------------------------
-	public List<User> showAllUser() {
-		return userDao.showAllUser();
+	public List<User> getAllUsers() {
+		return userDao.getAllUsers();
 	};
+	//------------------------------------------------------------------------------
+	public User getUserById(Long userId) {
+		return userDao.getUserById(userId);
+	}
 	//------------------------------------------------------------------------------
 	public boolean validateUser(String loginName, String password) {
 		return userDao.validateUser(loginName, password);

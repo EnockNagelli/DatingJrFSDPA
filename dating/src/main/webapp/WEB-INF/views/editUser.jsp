@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Online Dating Application - Registration Page</title>
+		<title>Online Dating Application - Edit User Details</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -11,46 +11,53 @@
 	<body><br>
 		<div class="container">
 			<div style="height: 100px;">
-				<div class="bg-danger h-50 d-inline-block text-white text-center form-rounded" style="width: 1120px;"><h2>User Registration for Dating</h2></div>
+				<div class="bg-danger h-50 d-inline-block text-white text-center form-rounded" style="width: 1120px;"><h2>Dating Application : Edit User Details</h2></div>
 		  		<div>&nbsp;</div>
-		  		<div class="h-50 d-inline-block text-red text-center form-rounded" style="width: 1120px;"><h2>User Registration Form</h2></div>
-		  		<form action="saveUser" class="was-validated" method=post>
-		    		<div class="form-group">
-		    			<label for="firstName">First Name</label>
-		    			<input type="text" class="form-control" id="firstName" placeholder="Enter User Name" name="firstName" required>
-		    			<div class="valid-feedback">Valid.</div>
+		  		<div class="h-50 d-inline-block text-red text-center form-rounded" style="width: 1120px;"><h2>Editing User Details</h2></div>
+		  		<form action="../saveEditUser/${userData.userId}">
+		  			<div class="form-row">
+			    		<div class="form-col">
+			    			<label for="firstName">First Name</label>
+			    			<input type="text" class="form-control" name="firstName" value='${userData.firstName}' required />
+			    			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div></div>
+			    		<div class="form-col">
+			      			<label for="lastName">Last Name</label>
+			      			<input type="text" class="form-control" name="lastName" value='${userData.lastName}' required />
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
 		    		</div>
-		    		<div class="form-group">
-		      			<label for="lastName">Last Name</label>
-		      			<input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" required>
-		      			<div class="valid-feedback">Valid.</div>
+		  			<div class="form-row">
+			    		<div class="form-col">
+			      			<label for="dateOfBirth">Date of Birth</label>
+			      			<input type="text" class="form-control" name="dateOfBirth" value='${userData.dateOfBirth}' required />
+			      			<div class="valid-feedback">Valid.</div>
+					    </div>
+			    		<div class="form-group">
+							<label for="gender">Gender</label>
+			      			<input type="text" class="form-control" name="gender" value='${userData.gender}' required />
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
 		    		</div>
-		    		<div class="form-group">
-		      			<label for="dateOfBirth">Date of Birth</label>
-		      			<input type="text" class="form-control" id="dateOfBirth" placeholder="Enter Date Of Birth" name="dateOfBirth" required>
-		      			<div class="valid-feedback">Valid.</div>
-				    </div>
-		    		<div class="form-group">
-						<label for="gender">Gender</label>
-		      			<input type="text" class="form-control" id="gender" placeholder="Enter Gender" name="gender" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
+		  			<%-- <div class="form-row">
+			    		<div class="form-col">
+			      			<label for="loginName">Login Name</label>
+			      			<input type="text" class="form-control" name="loginName" value='${userData.loginName}' required />
+			      			<div class="valid-feedback">Valid.</div>
+					    </div>
+			    		<div class="form-group">
+							<label for="password">Password</label>
+			      			<input type="text" class="form-control" name="password" value='${userData.password}' required />
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
+		    		</div> --%>
 		    		<div class="form-group">
 		      			<label for="address">Current Address</label>
-		      			<textarea class="form-control" rows="7" id="address" placeholder="Current Address" name="address" required></textarea>
+		      			<textarea class="form-control" rows="7" name="address" required>${userData.address}</textarea>
 		      			<div class="valid-feedback">Valid.</div>
 		    		</div>
-		    		<div class="form-group">
-						<label for="loginName">Login Name</label>
-		      			<input type="text" class="form-control" id="loginName" placeholder="Enter Login Name" name="loginName" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-						<label for="password">Password</label>
-		      			<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<button type="submit" class="btn btn-primary">Commit Registration</button>
+		    		<button type="submit" class="btn btn-primary">Update User</button>
 		  		</form><br>
 				<div class="bg-primary h-50 text-white text-center form-rounded">@ Copy right : www.iiht.com</div>
 		  	</div>
