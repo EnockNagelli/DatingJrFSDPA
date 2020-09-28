@@ -1,10 +1,10 @@
 package com.iiht.dating.exception;
 
-public class DatingException extends RuntimeException {
+public class InvalidDatingException extends RuntimeException {
 
 	private static final long serialVersionUID = -4151179097243302476L;
 
-	public DatingException(String message) {
+	public InvalidDatingException(String message) {
 		super(message);
 	}
 }

@@ -19,7 +19,19 @@ public class UserDaoImpl implements UserDao {
 	
 	//-----------------------------------------------------------------------------------------------------------
 	public Boolean saveUser(User user) {
-		sessionFactory.getCurrentSession().save(user);
+		
+		User newUser = new User();
+		
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
+		newUser.setDateOfBirth(user.getDateOfBirth());
+		newUser.setGender(user.getGender());
+		newUser.setAddress(user.getAddress());
+		newUser.setLoginName(user.getLoginName());
+		newUser.setPassword(user.getPassword());
+		
+		sessionFactory.getCurrentSession().save(newUser);
+
 		return Boolean.TRUE;
 	};
 	//-----------------------------------------------------------------------------------------------------------

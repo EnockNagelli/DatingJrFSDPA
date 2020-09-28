@@ -27,10 +27,10 @@ public class AppConfig
 	@Autowired
 	private Environment env;
 	
-	@Bean
-	public HibernateTemplate hibernateTemplate() throws Exception {
-		return new HibernateTemplate(sessionFactory());
-	}
+	/*
+	 * @Bean public HibernateTemplate hibernateTemplate() throws Exception { return
+	 * new HibernateTemplate(sessionFactory()); }
+	 */
 
 	@Bean
 	public SessionFactory sessionFactory() {

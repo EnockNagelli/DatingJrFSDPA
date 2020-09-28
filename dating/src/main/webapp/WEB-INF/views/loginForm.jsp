@@ -13,14 +13,11 @@
             }
         </style>
     </head>
-    <body><br>
+    <body>
 		<jsp:include page="header.jsp"/>
-		<hr/>
         <div class="container">
-            <h2 align="center" class="text-primary">Dating Application - User Login</h2>
-            <hr />
-            <div> </div>
- 
+			<hr/>
+            <h2 align="center" class="text-primary">User Login</h2>
             <form:form action="loginInfo" method="POST" modelAttribute="userform">
                  <div class="form-group">
                     <label>Login Name:</label><form:input path="loginName" size="30" cssClass="form-control" placeholder="Enter Login Name" />             
@@ -34,8 +31,8 @@
                     <button type="submit" class="btn btn-primary">Login</button>
                  </div>
             </form:form>
+	        <hr/>
         </div>
-        <hr/>
 		<jsp:include page="footer.jsp"/>
     </body>
 </html>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.iiht.dating.exception.DatingException;
+import com.iiht.dating.exception.InvalidDatingException;
 import com.iiht.dating.model.DatingExceptionResponse;
 import com.iiht.dating.model.DatingInfo;
 import com.iiht.dating.service.DatingService;
@@ -67,8 +67,8 @@ public class DatingController {
 	//----------------------------------------------------------------------------------------------------------------
 	// 			1. Exception Handling
 	//----------------------------------------------------------------------------------------------------------------
-	@ExceptionHandler(DatingException.class)
-	public ResponseEntity<DatingExceptionResponse> UserHandler(DatingException exception) {
+	@ExceptionHandler(InvalidDatingException.class)
+	public ResponseEntity<DatingExceptionResponse> UserHandler(InvalidDatingException exception) {
 		DatingExceptionResponse resp = new DatingExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value());
 		ResponseEntity<DatingExceptionResponse> response = new ResponseEntity<DatingExceptionResponse>(resp, HttpStatus.BAD_REQUEST);		
 		return response;

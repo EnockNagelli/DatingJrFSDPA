@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.iiht.dating.exception.ProfileException;
+import com.iiht.dating.exception.InvalidProfileException;
 import com.iiht.dating.model.Profile;
 import com.iiht.dating.model.ProfileExceptionResponse;
 import com.iiht.dating.service.ProfileService;
@@ -82,8 +82,8 @@ public class ProfileController {
 	//----------------------------------------------------------------------------------------------------------------
 	// 			1. Exception Handling
 	//----------------------------------------------------------------------------------------------------------------
-	@ExceptionHandler(ProfileException.class)
-	public ResponseEntity<ProfileExceptionResponse> UserHandler(ProfileException exception) {
+	@ExceptionHandler(InvalidProfileException.class)
+	public ResponseEntity<ProfileExceptionResponse> UserHandler(InvalidProfileException exception) {
 		ProfileExceptionResponse resp = new ProfileExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value());
 		ResponseEntity<ProfileExceptionResponse> response = new ResponseEntity<ProfileExceptionResponse>(resp, HttpStatus.BAD_REQUEST);		
 		return response;
