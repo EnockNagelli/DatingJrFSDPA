@@ -8,61 +8,67 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	</head>
-	<body><br>
+	<body>
 		<jsp:include page="header.jsp"/>
-		<hr/>
 		<div class="container">
-			<div style="height: 100px;">
-				<div class="bg-danger h-50 d-inline-block text-white text-center form-rounded" style="width: 1120px;"><h2>User Registration for Dating</h2></div>
-		  		<div>&nbsp;</div>
-		  		<div class="h-50 d-inline-block text-red text-center form-rounded" style="width: 1120px;"><h2>User Registration Form</h2></div>
+			<hr/>
+	    		<div class="form-group">
+			  		<div class="d-inline-block text-blue text-center form-rounded" style="width: 1120px;"><h2>User Registration Form</h2></div>
+			  	</div>
 		  		<form action="saveUser" class="was-validated" method=post>
-		    		<div class="form-group">
-		    			<label for="firstName">First Name</label>
-		    			<input type="text" class="form-control" id="firstName" placeholder="Enter User Name" name="firstName" required>
-		    			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-		      			<label for="lastName">Last Name</label>
-		      			<input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-		      			<label for="dateOfBirth">Date of Birth</label>
-		      			<input type="text" class="form-control" id="dateOfBirth" placeholder="Enter Date Of Birth" name="dateOfBirth" required>
-		      			<div class="valid-feedback">Valid.</div>
-				    </div>
-		    		<div class="form-group">
-						<label for="gender">Gender</label>
-		      			<input type="text" class="form-control" id="gender" placeholder="Enter Gender" name="gender" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-		      			<label for="address">Current Address</label>
-		      			<textarea class="form-control" rows="7" id="address" placeholder="Current Address" name="address" required></textarea>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-						<label for="loginName">Login Name</label>
-		      			<input type="text" class="form-control" id="loginName" placeholder="Enter Login Name" name="loginName" required>
-		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
-		    		<div class="form-group">
-						<label for="password">Password</label>
-		      			<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
-		      			<div class="valid-feedback">Valid.</div>
+		    		<div class="form-row">
+			    		<div class="form-col-md-3">
+			    			<label for="firstName">First Name</label>
+			    			<input type="text" class="form-control" id="firstName" placeholder="Enter User Name" name="firstName" required>
+			    			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div class="form-col-1"></div>
+			    		<div class="form-col-md-3">
+			      			<label for="lastName">Last Name</label>
+			      			<input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName" required>
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div class="form-col-2"></div>
+			    		<div class="form-cols-md-3">
+			      			<label for="dateOfBirth">Date of Birth</label>
+			      			<input type="text" class="form-control" id="dateOfBirth" placeholder="Enter Date Of Birth" name="dateOfBirth" required>
+			      			<div class="valid-feedback">Valid.</div>
+					    </div>
+ 					</div><br>
+		    		<div class="form-row">
+ 			    		<div class="form-col-md-3">
+							<label for="gender">Gender</label>
+			      			<input type="text" class="form-control" id="gender" placeholder="Enter Gender" name="gender" required>
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div class=form-col-5></div>
+			    		<div class="form-col-md-3">
+							<label for="loginName">Login Name</label>
+			      			<input type="text" class="form-control" id="loginName" placeholder="Enter Login Name" name="loginName" required>
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div class=form-col-5></div>
+			    		<div class="form-col-md-3">
+							<label for="password">Password</label>
+			      			<input type="text" class="form-control" id="password" placeholder="Enter Password" name="password" required>
+			      			<div class="valid-feedback">Valid.</div>
+			    		</div>
+			    		<div class=form-col-5></div>
+			    		<div class="form-col-md-3">
+			      			<label for="address">Current Address</label>
+			      			<textarea class="form-control" rows="4" id="address" placeholder="Current Address" name="address" required></textarea>
+			      			<div class="valid-feedback">Valid.</div>
+		    			</div>
 		    		</div>
 		    		<button type="submit" class="btn btn-primary">Commit Registration</button>
-		  		</form><br>
-				<div class="bg-primary h-50 text-white text-center form-rounded">@ Copy right : www.iiht.com</div>
+		  		</form>
+		  	<hr/>
 		  	</div>
-		</div>
-		<hr/>
-		<jsp:include page="footer.jsp"/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-		<script>
+			<jsp:include page="footer.jsp"/>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+			<script>
 			// Disable form submissions if there are invalid fields
 			(function() {
 			  	'use strict';
@@ -84,45 +90,3 @@
 		</script>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="f"  uri="http://java.sun.com/jsf/core"%>
-<%@ taglib prefix="h"  uri="http://java.sun.com/jsf/html"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Insert title here</title>
-	</head>
-	<body>
-		<!-- <f:view> </f:view> -->
-		<h2>Inside Add Company Page...</h2>
-	 </body>
-</html> --%>
