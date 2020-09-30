@@ -3,7 +3,9 @@ package com.iiht.dating.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,29 +52,24 @@ public class UserController {
 	}
 	//----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/loginInfo", method= RequestMethod.POST)
-	public ModelAndView doLogin(@Valid @ModelAttribute("userform") User user, BindingResult bindingResult) {
+	public ModelAndView doLogin(HttpServletRequest request, @Valid @ModelAttribute("userform") User user, BindingResult bindingResult) {
 
 		System.out.println("Inside Login authentication....");
 		
 		String loginName = user.getLoginName();
 		String password = user.getPassword();
 		
-//		boolean validUser = userService.validateUser(loginName, password);
-			
-//		if (validUser == false || bindingResult.hasErrors())
-//			throw new InvalidUserException("Invalid Login Credentials!!!");
-//		else 
-//			return new ModelAndView("home");
-		//----------------------------------------------------------------------------
-		
+		HttpSession session = request.getSession();
 		ModelAndView mav = null;
+
 		try 
 		{
 			boolean validUser = userService.validateUser(loginName, password);
+			
 			if (bindingResult.hasErrors() || validUser == false) {
 				mav = new ModelAndView("initUser");
-				throw new InvalidUserException("Invalid Login Credentials!!!");
 			} else {
+				session.setAttribute("loginName", loginName);
 				mav = new ModelAndView("home");
 			}
 		} catch (Exception e) {
@@ -95,21 +92,12 @@ public class UserController {
 
 		System.out.println("Inside Save User Information....");
 		
-//		Boolean validUser = userService.saveUser(user);
-		
-//		if(bindingResult.hasErrors() || validUser == false)
-//			throw new InvalidUserException("Invalid User Details!!!");
-//		else
-//			return new ModelAndView("home");
-//			//return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.saveCompanyDetails(companyDetailsDTO), HttpStatus.OK);
-		//-------------------------------------------------------------------------------------\
 		ModelAndView mav = null;
 		try 
 		{
 			Boolean validUser = userService.saveUser(user);
 			if (bindingResult.hasErrors() || validUser == false) {
 				mav = new ModelAndView("registerUser");
-				throw new InvalidUserException("Invalid User Details!!!");
 			} else {
 				mav = new ModelAndView("home");
 			}
@@ -124,6 +112,8 @@ public class UserController {
 	//----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/listAllUsers", method = RequestMethod.GET)
 	public ModelAndView findAllUsers() {
+			
+		//String loginName= (String) session.getAttribute("loginName");
 		
 		ModelAndView mav = null;
 		try 
@@ -133,15 +123,15 @@ public class UserController {
 			if (!CollectionUtils.isEmpty(userList)) {
 				mav = new ModelAndView("displayAllUsers", "userList", userList);
 			} else {
-				mav = new ModelAndView("home");
+				//mav = new ModelAndView("home");
 				throw new UserNotFoundException("No Records Found");
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return mav;		
-	}
-	
+	}	
+
 	//----------------------------------------------------------------------------------------------------------------
 	// 			1. Exception Handling
 	//----------------------------------------------------------------------------------------------------------------
@@ -153,9 +143,13 @@ public class UserController {
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<UserExceptionResponse> UserNotFoundHandler(UserNotFoundException exception) {
+	public ModelAndView UserNotFoundHandler(UserNotFoundException exception) {
+	//public ResponseEntity<UserExceptionResponse> UserNotFoundHandler(UserNotFoundException exception) {
 		UserExceptionResponse resp = new UserExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
-		ResponseEntity<UserExceptionResponse> response = new ResponseEntity<UserExceptionResponse>(resp, HttpStatus.NOT_FOUND);
-		return response;
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(resp.getMessage());
+		//ResponseEntity<UserExceptionResponse> response = new ResponseEntity<UserExceptionResponse>(resp, HttpStatus.NOT_FOUND);
+		//return response;
+		return mav;
 	}	
 }

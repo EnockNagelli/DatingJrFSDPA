@@ -1,20 +1,18 @@
 package com.iiht.dating.controller;
 
-import java.io.InputStream;
-import java.sql.Blob;
+import javax.validation.Valid;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-
-import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iiht.dating.exception.InvalidProfileException;
 import com.iiht.dating.model.Profile;
@@ -27,56 +25,31 @@ public class ProfileController {
 	@Autowired
 	private ProfileService profileService;
 	
-//	@Autowired
-//	private SessionFactory sessionFactory;
-	
 	//----------------------------------------------------------------------------------------------------------------
 	// 			1. ADD PROFILE INFORMATION FOR DATING APPLICATION
 	//----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/initProfile", method = RequestMethod.GET)
 	public String initView(Model model) {
-		model.addAttribute("profileForm", new Profile());
+		model.addAttribute("profileData", new Profile());
 		return "profileInfo";
 	}	
 	//----------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value = "/saveProfile", method = RequestMethod.POST)
-	public String saveProfileInfo(HttpServletRequest request) throws Exception {
+	public ModelAndView saveProfileInfo(@Valid @ModelAttribute("profileData") Profile profile, BindingResult bindingResult) throws InvalidProfileException {
 
 		System.out.println("Inside Save Profile Information....");
-		
-		Long userId = Long.parseLong(request.getParameter("userId"));
-		
-		InputStream inputStream = null;																	// input stream of the upload file
-        Part filePart = (Part) request.getPart("userPhoto");											// obtains the upload file part in this multipart request
-        if (filePart != null) {
-            inputStream = filePart.getInputStream();													// obtains input stream of the upload file
-        }
-        //Blob photo = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(inputStream, 16177215);
-        //org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: Could not obtain transaction-synchronized Session for current thread
-
-        Blob profileImage = BlobProxy.generateProxy(inputStream, 16177215);
-        Long contactNo = Long.parseLong(request.getParameter("contactNo"));
-		String email = request.getParameter("email");
-		String qualification = request.getParameter("qualification");
-		String foodHabits = request.getParameter("foodHabits");
-		String hobbies = request.getParameter("hobbies");
-		String aboutMe = request.getParameter("aboutMe");
-
-		Profile profile = new Profile();
-
-		profile.setUserId(userId);
-		profile.setProfileImage(profileImage);
-		//profile.setProfileImage(photo);
-		profile.setContactNo(contactNo);
-		profile.setEmail(email);
-		profile.setQualification(qualification);
-		profile.setHobbies(hobbies);
-		profile.setFoodHabits(foodHabits);
-		profile.setAboutMe(aboutMe);
-
-		profileService.saveProfile(profile);
-
-		return "home";
+		ModelAndView mav = null;
+		try {
+			Boolean validUser = profileService.saveProfile(profile);
+			if (bindingResult.hasErrors() || validUser == false) {
+				mav = new ModelAndView("initProfile");
+			} else {
+				mav = new ModelAndView("home");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}		
+		return mav;		
 	}
 	
 	//----------------------------------------------------------------------------------------------------------------

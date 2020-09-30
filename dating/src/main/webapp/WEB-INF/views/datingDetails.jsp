@@ -13,17 +13,17 @@
 		<div class="container">
 		<hr/>
 	  		<div class="h-50 d-inline-block text-red text-center form-rounded" style="width: 1120px;"><h2>Dating Proposal Form</h2></div>
-	  		<form action="saveDatingProposal" class="was-validated" method=post>
+	  		<form action="saveDatingProposal" class="was-validated" method="POST">
 
 	    		<div class="form-row">
 		    		<div class="form-col">
 		    			<label for="userId">Sender Id</label>
-		    			<input type="text" class="form-control" id="userId" placeholder="Enter User Id" name="userId" required>
+		    			<input type="text" class="form-control" id="userId" value="${loginUserId}" name="userId" required>
 		    			<div class="valid-feedback">Valid.</div>
 		    		</div>
 		    		<div class="form-col">
 		      			<label for="receiverId">Receiver Id</label>
-		      			<input type="text" class="form-control" id="receiverId" placeholder="Enter Receiver Id" name="receiverId" required>
+		      			<input type="text" class="form-control" id="receiverId" value="${userId}" name="receiverId" required>
 		      			<div class="valid-feedback">Valid.</div>
 		    		</div>
 		    	</div>
@@ -31,12 +31,12 @@
 	    		<div class="form-row">
 		    		<div class="form-col">
 		      			<label for="datingDate">Fixing Date for Dating</label>
-		      			<input type="text" class="form-control" id="dateFixing" placeholder="Enter Date for Dating" name="datingDate" required>
+		      			<input type="text" class="form-control" id="datingDate" placeholder="Enter Date for Dating" name="datingDate" required>
 		      			<div class="valid-feedback">Valid.</div>
 				    </div>
 		    		<div class="form-col">
 						<label for="datingTime">Preferred Dating Time</label>
-		      			<input type="text" class="form-control" id="timeFixing" placeholder="Enter Time for Dating" name="datingTime" required>
+		      			<input type="text" class="form-control" id="datingTime" placeholder="Enter Time for Dating" name="datingTime" required>
 		      			<div class="valid-feedback">Valid.</div>
 		    		</div>
 	    		</div>
@@ -56,7 +56,7 @@
 
 	    		<div class="form-group">
 	      			<label for="datingRequest">Dating Proposal</label>
-	      			<textarea class="form-control" rows="7" id="address" placeholder="Dating Proposal" name="datingRequest" required></textarea>
+	      			<textarea class="form-control" rows="7" id="datingRequest" placeholder="Dating Proposal" name="datingRequest" required></textarea>
 	      			<div class="valid-feedback">Valid.</div>
 	    		</div>
 

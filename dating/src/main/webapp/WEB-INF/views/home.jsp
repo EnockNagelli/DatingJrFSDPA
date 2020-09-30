@@ -16,7 +16,7 @@
 					<a href="registerUser"	class="btn btn-info btn-md btn-block"><b>Add User Info</b></a><br>
 					<a href="listAllUsers"	class="btn btn-info btn-md btn-block"><b>View All User</b></a><br>
 					<a href="initProfile" 	class="btn btn-info btn-md btn-block"><b>Add Profile Info</b></a><br>
-					<a href="initDating" 	class="btn btn-info btn-md btn-block"><b>Dating Proposal</b></a><br>
+					<a href="listDatingProposals" 	class="btn btn-info btn-md btn-block"><b>All Dating Proposals</b></a><br>
 				</div>
 			</div>
 			<hr/>
