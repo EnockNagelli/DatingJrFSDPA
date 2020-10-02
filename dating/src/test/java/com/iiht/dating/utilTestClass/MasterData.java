@@ -42,15 +42,15 @@ public class MasterData
 		
 		profile.setUserId((long)1);
 		
-		InputStream inputStream = null;												// input stream of the upload file
-        Part filePart = (Part) new File("profilePhoto");							// obtains the upload file part in this multipart request
+		InputStream inputStream = null;														// input stream of the upload file
+        Part filePart = (Part) new File("E:\\Enock's Profiles\\Nexwave Photo.jpg");			// obtains the upload file part in this multipart request
 		if (filePart != null) {
 			try {
-				inputStream = filePart.getInputStream();
+				inputStream = filePart.getInputStream();									// obtains input stream of the upload file
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}																		// obtains input stream of the upload file
+			}																				
 		}
         //Blob photo = Hibernate.getLobCreator(sessionFactory.getCurrentSession()).createBlob(inputStream, 16177215);
         //org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.hibernate.HibernateException: Could not obtain transaction-synchronized Session for current thread

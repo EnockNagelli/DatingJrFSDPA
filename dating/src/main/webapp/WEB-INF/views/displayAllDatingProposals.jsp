@@ -26,7 +26,8 @@
 		<jsp:include page="header.jsp"/>
 		<div class="container">
 		<hr/>
-			<h2 align="center" class="text-primary text-center">All Recored Dating Proposals</h2>
+			<% String loginName = (String) session.getAttribute("loginName"); %>
+			<h2 align="center" class="text-primary text-center">All Dating Proposals Received by <c:out value='${loginName.toUpperCase()}'/></h2>
 			<div class="container-fluid">
 			 	<div class="row-fluid">
 			  		<div class="span12">
@@ -40,6 +41,7 @@
 							        <th>Dating Location</th>
 							        <th>Dating Request</th>
 							        <th>Dating Status</th>
+							        <th class="text-primary" >Proposal Request</th>
 							    </tr>
 					           	<c:forEach var="dating" items="${datingList}">
 						            <tr>
@@ -50,7 +52,7 @@
 						                <td><c:out value="${dating.location}" /></td>
 						                <td><c:out value="${dating.datingRequest}" /></td>
 						                <td><c:out value="${dating.requestStatus}" /></td>
-						                <td><a href="withStatus/${dating.userId}" style='text-decoration: none;'>Accepted</a> | <a href="withStatus/${dating.userId}" style='text-decoration: none;'>Rejected</a></td>
+						                <td><a href="withStatus/${dating.userId}" style='text-decoration: red;'>Accepted</a> | <a href="withStatus/${dating.userId}" style='text-decoration: none;'>Rejected</a></td>
 						            </tr>
 					           	</c:forEach>
 					        </table>

@@ -1,13 +1,15 @@
 package com.iiht.dating.dao;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.iiht.dating.model.DatingInfo;
 
@@ -37,7 +39,7 @@ public class DatingDaoImpl implements DatingDao {
 //		datingInfo.setDatingDate(datingDate);
 //		datingInfo.setDatingTime(datingTime);
 //		datingInfo.setLocation(location);
-//		datingInfo.setRequestStatus(requestStatus);
+//		datingInfo.setRequestStatus("Pending");
 //		datingInfo.setDatingRequest(datingRequest);
 
 		sessionFactory.getCurrentSession().save(datingInfo);
@@ -47,7 +49,14 @@ public class DatingDaoImpl implements DatingDao {
 	//-----------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<DatingInfo> getAllDatingProposals() {
-		String hql = "FROM DatingInfo";
+		
+		ServletRequestAttributes requestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+		HttpSession session = requestAttributes.getRequest().getSession();
+		
+		Long loginUserId = (Long) session.getAttribute("loginUserId");
+
+		String hql = "SELECT us FROM DatingInfo us WHERE us.receiverId="+loginUserId;
+						
 		return (List<DatingInfo>) sessionFactory.getCurrentSession().createQuery(hql).list();		
 	};
 

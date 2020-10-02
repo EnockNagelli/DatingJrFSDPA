@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 	//-----------------------------------------------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
-		
+
 		ServletRequestAttributes requestAttributes = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
 		HttpSession session = requestAttributes.getRequest().getSession();
 		

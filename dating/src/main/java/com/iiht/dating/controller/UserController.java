@@ -64,8 +64,7 @@ public class UserController {
 
 		try 
 		{
-			boolean validUser = userService.validateUser(loginName, password);
-			
+			boolean validUser = userService.validateUser(loginName, password);			
 			if (bindingResult.hasErrors() || validUser == false) {
 				mav = new ModelAndView("initUser");
 			} else {
@@ -145,11 +144,17 @@ public class UserController {
 	@ExceptionHandler(UserNotFoundException.class)
 	public ModelAndView UserNotFoundHandler(UserNotFoundException exception) {
 	//public ResponseEntity<UserExceptionResponse> UserNotFoundHandler(UserNotFoundException exception) {
-		UserExceptionResponse resp = new UserExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
-		ModelAndView mav = new ModelAndView();
-		mav.addObject(resp.getMessage());
+		//UserExceptionResponse resp = new UserExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
+		ModelAndView mav = new ModelAndView("error");
+		mav.addObject("UNFException", exception);
 		//ResponseEntity<UserExceptionResponse> response = new ResponseEntity<UserExceptionResponse>(resp, HttpStatus.NOT_FOUND);
 		//return response;
 		return mav;
-	}	
+	}
+	
+	/*
+	 * @ExceptionHandler(ForumException.class) public ModelAndView
+	 * handleException(ForumException ex) { ModelAndView mv = new
+	 * ModelAndView("error"); mv.addObject("exception", ex); return mv; }
+	 */
 }

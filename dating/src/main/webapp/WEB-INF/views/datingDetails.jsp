@@ -47,11 +47,11 @@
 		      			<input type="text" class="form-control" id="location" placeholder="Enter Dating Location" name="location" required>
 		      			<div class="valid-feedback">Valid.</div>
 		    		</div>
-		    		<div class="form-col">
+		    		<!-- <div class="form-col">
 						<label for="requestStatus">Dating Status</label>
 		      			<input type="text" class="form-control" id="requestStatus" placeholder="Enter Status" name="requestStatus" required>
 		      			<div class="valid-feedback">Valid.</div>
-		    		</div>
+		    		</div> -->
 		    	</div>
 
 	    		<div class="form-group">

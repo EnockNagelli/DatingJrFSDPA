@@ -61,7 +61,7 @@ public class ProfileController {
 		ResponseEntity<ProfileExceptionResponse> response = new ResponseEntity<ProfileExceptionResponse>(resp, HttpStatus.BAD_REQUEST);		
 		return response;
 	}
-	
+
 //	@ExceptionHandler(ProfileNotFoundException.class)
 //	public ResponseEntity<ProfileExceptionResponse> UserNotFoundHandler(ProfileNotFoundException exception) {
 //		ProfileExceptionResponse resp = new ProfileExceptionResponse(exception.getMessage(),System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());

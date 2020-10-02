@@ -1,0 +1,9 @@
+
+testViewAllDatingProposals=false
+testNewLoginUrl=false
+testNewLoginValidation=false
+testListAllUsers=true
+testSaveDatingProposal=false
+testNewProfileUrl=false
+testLoadingPageUrl=true
+testSaveNewPost=false
